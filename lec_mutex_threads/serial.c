@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 /*   
 The following structure contains the necessary information  
@@ -15,7 +16,7 @@ typedef struct
   int    veclen; 
 } DOTDATA;
 
-#define VECLEN 100000
+#define VECLEN 100000000
   DOTDATA dotstr; 
 
 /*
@@ -61,6 +62,8 @@ Finally, it prints the result.
 
 int main (int argc, char *argv[])
 {
+clock_t start = clock();
+
 int i,len;
 double *a, *b;
    
@@ -84,6 +87,9 @@ dotprod ();
 
 /* Print result and release storage */ 
 printf ("Sum =  %f \n", dotstr.sum);
+clock_t end = clock();
+double elapsed_time = (double)(end - start) / CLOCKS_PER_SEC;
+printf("Elapsed time: %f seconds\n", elapsed_time);
 free (a);
 free (b);
 }

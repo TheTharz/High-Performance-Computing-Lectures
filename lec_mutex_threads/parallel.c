@@ -1,6 +1,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 /*   
 The following structure contains the necessary information  
@@ -20,7 +21,7 @@ typedef struct
 /* Define globally accessible variables and a mutex */
 
 #define NUMTHRDS 4
-#define VECLEN 100000
+#define VECLEN 25000000
    DOTDATA dotstr; 
    pthread_t callThd[NUMTHRDS];
    pthread_mutex_t mutexsum;
@@ -87,6 +88,8 @@ no longer needed.
 
 int main (int argc, char *argv[])
 {
+clock_t start = clock();
+
 long i;
 double *a, *b;
 void *status;
@@ -131,6 +134,9 @@ for(i=0;i<NUMTHRDS;i++) {
 /* After joining, print out the results and cleanup */
 
 printf ("Sum =  %f \n", dotstr.sum);
+clock_t end = clock();
+double elapsed_time = (double)(end - start) / CLOCKS_PER_SEC;
+printf("Elapsed time: %f seconds\n", elapsed_time);
 free (a);
 free (b);
 pthread_mutex_destroy(&mutexsum);
