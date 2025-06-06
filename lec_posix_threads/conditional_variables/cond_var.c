@@ -19,7 +19,7 @@
 
 #define NUM_THREADS  3
 #define TCOUNT 10
-#define COUNT_LIMIT 12
+#define COUNT_LIMIT 20
 
 int     count = 0;
 pthread_mutex_t count_mutex;
